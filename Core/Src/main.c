@@ -102,7 +102,6 @@ static void noop();
 static inv_device_icm20948_t imu;
 
 static uint16_t vl53l1xDev=0x52;
-//static uint16_t vl53l1xDev=0x53;
 
 static const inv_sensor_listener_t sensor_listener = {
                                                       sensor_event_cb, /* callback that will receive sensor events */
@@ -112,9 +111,6 @@ static const inv_sensor_listener_t sensor_listener = {
 static const uint8_t dmp3_image[] = {
 #include "Invn/Images/icm20948_img.dmp3a.h"
 };
-
-//static const uint8_t gyroBias[] = {172, 186, 199};
-//static const uint8_t accelBias[] = {112, 106, 129};
 
 volatile float m[3] = {0.0, 0.0, 0.0};
 volatile float a[3] = {0.0, 0.0, 0.0};
@@ -171,9 +167,8 @@ int main(void)
     int rc = 0;
     int distStatus = 0;
     uint8_t dataReady = 0;
-    inv_device_t* device;
-
     uint8_t screenIdx = 0;
+    inv_device_t* device;
     /* USER CODE END 1 */
 
     /* MCU Configuration--------------------------------------------------------*/
@@ -450,8 +445,7 @@ static void MX_DAC1_Init(void)
         Error_Handler();
     }
     /* USER CODE BEGIN DAC1_Init 2 */
-    //    HAL_DACEx_SelfCalibrate(&hdac1, &sConfig, DAC_CHANNEL_1);
-    //    HAL_DACEx_SelfCalibrate(&hdac1, &sConfig, DAC_CHANNEL_2);
+
     /* USER CODE END DAC1_Init 2 */
 
 }
@@ -916,20 +910,6 @@ static inv_device_t* initICM20948(void){
 
     inv_icm20948_set_lowpower_or_highperformance(&(imu.icm20948_states), 1);
 
-    //    rc = inv_device_icm20948_set_sensor_config(&imu,
-    //            INV_SENSOR_TYPE_ACCELEROMETER,
-    //            INV_DEVICE_ICM20948_CONFIG_OFFSET,
-    //            (const void*)&accelBias,
-    //            0);
-    //    check_rc(rc);
-    //
-    //    rc = inv_device_icm20948_set_sensor_config(&imu,
-    //            INV_SENSOR_TYPE_GYROSCOPE,
-    //            INV_DEVICE_ICM20948_CONFIG_OFFSET,
-    //            (const void*)&gyroBias,
-    //            0);
-    //    check_rc(rc);
-
     rc  = inv_device_set_sensor_period_us(device, INV_SENSOR_TYPE_ACCELEROMETER, 50000);
     check_rc(rc);
     rc  = inv_device_set_sensor_period_us(device, INV_SENSOR_TYPE_GYROSCOPE, 50000);
@@ -937,7 +917,6 @@ static inv_device_t* initICM20948(void){
     rc  = inv_device_set_sensor_period_us(device, INV_SENSOR_TYPE_MAGNETOMETER, 50000);
     check_rc(rc);
     rc  = inv_device_set_sensor_period_us(device, INV_SENSOR_TYPE_ROTATION_VECTOR, 50000);
-    //    rc  = inv_device_set_sensor_period_us(device, INV_SENSOR_TYPE_ORIENTATION, 50000);
     check_rc(rc);
 
     rc = inv_device_start_sensor(device, INV_SENSOR_TYPE_ACCELEROMETER);
@@ -947,7 +926,6 @@ static inv_device_t* initICM20948(void){
     rc = inv_device_start_sensor(device, INV_SENSOR_TYPE_MAGNETOMETER);
     check_rc(rc);
     rc = inv_device_start_sensor(device, INV_SENSOR_TYPE_ROTATION_VECTOR);
-    //    rc = inv_device_start_sensor(device, INV_SENSOR_TYPE_ORIENTATION);
     check_rc(rc);
 
     return device;
@@ -960,6 +938,13 @@ static void check_rc(int rc){
     }
 }
 
+/*
+ *      Conversion from quaternions to euler angles (Wikipedia: https://en.wikipedia.org/wiki/Conversion_between_quaternions_and_Euler_angles)
+ *      Angles used in the project are phi and psi
+ * phi = atan2(2*((q[0]*q[1])+(q[2]*q[3])),1-(2*(pow(q[1],2)+pow(q[2],2))));
+ * theta = asin(2*((q[0]*q[2])-(q[3]*q[1])));
+ * psi = atan2(2*((q[0]*q[3])+(q[1]*q[2])),1-(2*(pow(q[2],2)+pow(q[3],2))));
+ */
 static void sensor_event_cb(const inv_sensor_event_t * event, void * arg){
     (void)arg;
 
@@ -975,12 +960,8 @@ static void sensor_event_cb(const inv_sensor_event_t * event, void * arg){
 
         acc = event->data.quaternion.accuracy_flag;
 
-        theta = atan2(2*((q[0]*q[1])+(q[2]*q[3])),1-(2*(pow(q[1],2)+pow(q[2],2))));//*M_1_PI*180;
-        phi = atan2(2*((q[0]*q[3])+(q[1]*q[2])),1-(2*(pow(q[2],2)+pow(q[3],2))));//*M_1_PI*180;
-
-//        phi = atan2(2*((q[0]*q[1])+(q[2]*q[3])),1-(2*(pow(q[1],2)+pow(q[2],2))));//*M_1_PI*180;
-//        theta = asin(2*((q[0]*q[2])-(q[3]*q[1])));//*M_1_PI*180;
-//        psi = atan2(2*((q[0]*q[3])+(q[1]*q[2])),1-(2*(pow(q[2],2)+pow(q[3],2))));//*M_1_PI*180;
+        theta = atan2(2*((q[0]*q[1])+(q[2]*q[3])),1-(2*(pow(q[1],2)+pow(q[2],2))));
+        phi = atan2(2*((q[0]*q[3])+(q[1]*q[2])),1-(2*(pow(q[2],2)+pow(q[3],2))));
 
         if(theta <= -M_PI_2)
             angToDAC[THETA_IDX] = 0;
@@ -992,26 +973,11 @@ static void sensor_event_cb(const inv_sensor_event_t * event, void * arg){
         angToDAC[PHI_IDX] = (phi >= 0) ?
                 phi*M_1_PI*2047 : (phi+(2*M_PI))*M_1_PI*2047;
 
-//        angToDAC[THETA_IDX] = (theta >= 0) ?
-//                theta*M_1_PI(theta+M_PI)*M_1_PI*0.5*4095;
-//        angToDAC[PHI_IDX] = (phi+M_PI)*M_1_PI*0.5*4095;
-
         angToLCD[THETA_IDX] = (theta+M_PI_2)*M_2_PI*90;
         angToLCD[PHI_IDX] = (phi >= 0) ?
                 phi*M_1_PI*180 : (phi+(2*M_PI))*M_1_PI*180;
 
-//        angToLCD[THETA_IDX] = (theta >= 0) ?
-//                theta*M_1_PI*180 : (theta+(2*M_PI))*M_1_PI*180;
-//        angToLCD[PHI_IDX] = (phi >= 0) ?
-//                phi*M_1_PI*180 : (phi+(2*M_PI))*M_1_PI*180;
     }
-
-    //            if(event->status == INV_SENSOR_STATUS_DATA_UPDATED &&
-    //               INV_SENSOR_ID_TO_TYPE(event->sensor) == INV_SENSOR_TYPE_ORIENTATION){
-    //                a[0] = event->data.orientation.x;
-    //                a[1] = event->data.orientation.y;
-    //                a[2] = event->data.orientation.z;
-    //            }
 
 }
 
@@ -1227,30 +1193,30 @@ static void noop(void* arg){
  * @brief  This function is executed in case of error occurrence.
  * @retval None
  */
-void Error_Handler(void)
+ void Error_Handler(void)
 {
     /* USER CODE BEGIN Error_Handler_Debug */
-    /* User can add his own implementation to report the HAL error return state */
-    __disable_irq();
-    while (1)
-    {
-    }
-    /* USER CODE END Error_Handler_Debug */
+     /* User can add his own implementation to report the HAL error return state */
+     __disable_irq();
+     while (1)
+     {
+     }
+     /* USER CODE END Error_Handler_Debug */
 }
 
 #ifdef  USE_FULL_ASSERT
-/**
- * @brief  Reports the name of the source file and the source line number
- *         where the assert_param error has occurred.
- * @param  file: pointer to the source file name
- * @param  line: assert_param error line source number
- * @retval None
- */
-void assert_failed(uint8_t *file, uint32_t line)
-{
-    /* USER CODE BEGIN 6 */
-    /* User can add his own implementation to report the file name and line number,
+ /**
+  * @brief  Reports the name of the source file and the source line number
+  *         where the assert_param error has occurred.
+  * @param  file: pointer to the source file name
+  * @param  line: assert_param error line source number
+  * @retval None
+  */
+ void assert_failed(uint8_t *file, uint32_t line)
+ {
+     /* USER CODE BEGIN 6 */
+     /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
-    /* USER CODE END 6 */
-}
+     /* USER CODE END 6 */
+ }
 #endif /* USE_FULL_ASSERT */

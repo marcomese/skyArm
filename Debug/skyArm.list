@@ -37,17 +37,17 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING, OCTETS
  16 .debug_macro  00028fec  00000000  00000000  0007c448  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_line   00029490  00000000  00000000  000a5434  2**0
+ 17 .debug_line   0002948c  00000000  00000000  000a5434  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_str    000edd33  00000000  00000000  000ce8c4  2**0
+ 18 .debug_str    000edd33  00000000  00000000  000ce8c0  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .comment      00000050  00000000  00000000  001bc5f7  2**0
+ 19 .comment      00000050  00000000  00000000  001bc5f3  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  0000b108  00000000  00000000  001bc648  2**2
+ 20 .debug_frame  0000b108  00000000  00000000  001bc644  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 21 .stab         0000003c  00000000  00000000  001c7750  2**2
+ 21 .stab         0000003c  00000000  00000000  001c774c  2**2
                   CONTENTS, READONLY, DEBUGGING
- 22 .stabstr      00000076  00000000  00000000  001c778c  2**0
+ 22 .stabstr      00000076  00000000  00000000  001c7788  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -1496,8 +1496,6 @@ int main(void)
     uint8_t dataReady = 0;
  80010d0:	2300      	movs	r3, #0
  80010d2:	71fb      	strb	r3, [r7, #7]
-    inv_device_t* device;
-
     uint8_t screenIdx = 0;
  80010d4:	2300      	movs	r3, #0
  80010d6:	75fb      	strb	r3, [r7, #23]
@@ -2223,9 +2221,9 @@ static void MX_DAC1_Init(void)
     {
         Error_Handler();
  8001548:	f001 f980 	bl	800284c <Error_Handler>
+    }
     /* USER CODE BEGIN DAC1_Init 2 */
-    //    HAL_DACEx_SelfCalibrate(&hdac1, &sConfig, DAC_CHANNEL_1);
-    //    HAL_DACEx_SelfCalibrate(&hdac1, &sConfig, DAC_CHANNEL_2);
+
     /* USER CODE END DAC1_Init 2 */
 
 }
@@ -3504,10 +3502,6 @@ static inv_device_t* initICM20948(void){
  8001d0a:	2101      	movs	r1, #1
  8001d0c:	482a      	ldr	r0, [pc, #168]	; (8001db8 <initICM20948+0x114>)
  8001d0e:	f00f fe2d 	bl	801196c <inv_icm20948_set_lowpower_or_highperformance>
-    //            INV_DEVICE_ICM20948_CONFIG_OFFSET,
-    //            (const void*)&gyroBias,
-    //            0);
-    //    check_rc(rc);
 
     rc  = inv_device_set_sensor_period_us(device, INV_SENSOR_TYPE_ACCELEROMETER, 50000);
  8001d12:	f24c 3250 	movw	r2, #50000	; 0xc350
@@ -3542,7 +3536,6 @@ static inv_device_t* initICM20948(void){
  8001d54:	68b8      	ldr	r0, [r7, #8]
  8001d56:	f7ff f973 	bl	8001040 <inv_device_set_sensor_period_us>
  8001d5a:	60f8      	str	r0, [r7, #12]
-    //    rc  = inv_device_set_sensor_period_us(device, INV_SENSOR_TYPE_ORIENTATION, 50000);
     check_rc(rc);
  8001d5c:	68f8      	ldr	r0, [r7, #12]
  8001d5e:	f000 f82d 	bl	8001dbc <check_rc>
@@ -3576,7 +3569,6 @@ static inv_device_t* initICM20948(void){
  8001d94:	68b8      	ldr	r0, [r7, #8]
  8001d96:	f7ff f925 	bl	8000fe4 <inv_device_start_sensor>
  8001d9a:	60f8      	str	r0, [r7, #12]
-    //    rc = inv_device_start_sensor(device, INV_SENSOR_TYPE_ORIENTATION);
     check_rc(rc);
  8001d9c:	68f8      	ldr	r0, [r7, #12]
  8001d9e:	f000 f80d 	bl	8001dbc <check_rc>
@@ -3621,7 +3613,11 @@ static void check_rc(int rc){
  8001de4:	00000000 	.word	0x00000000
 
 08001de8 <sensor_event_cb>:
-
+ *      Angles used in the project are phi and psi
+ * phi = atan2(2*((q[0]*q[1])+(q[2]*q[3])),1-(2*(pow(q[1],2)+pow(q[2],2))));
+ * theta = asin(2*((q[0]*q[2])-(q[3]*q[1])));
+ * psi = atan2(2*((q[0]*q[3])+(q[1]*q[2])),1-(2*(pow(q[2],2)+pow(q[3],2))));
+ */
 static void sensor_event_cb(const inv_sensor_event_t * event, void * arg){
  8001de8:	e92d 43b0 	stmdb	sp!, {r4, r5, r7, r8, r9, lr}
  8001dec:	b086      	sub	sp, #24
@@ -3674,7 +3670,7 @@ static void sensor_event_cb(const inv_sensor_event_t * event, void * arg){
  8001e38:	4bd1      	ldr	r3, [pc, #836]	; (8002180 <sensor_event_cb+0x398>)
  8001e3a:	701a      	strb	r2, [r3, #0]
 
-        theta = atan2(2*((q[0]*q[1])+(q[2]*q[3])),1-(2*(pow(q[1],2)+pow(q[2],2))));//*M_1_PI*180;
+        theta = atan2(2*((q[0]*q[1])+(q[2]*q[3])),1-(2*(pow(q[1],2)+pow(q[2],2))));
  8001e3c:	ed97 7a02 	vldr	s14, [r7, #8]
  8001e40:	edd7 7a03 	vldr	s15, [r7, #12]
  8001e44:	ee27 7a27 	vmul.f32	s14, s14, s15
@@ -3734,7 +3730,7 @@ static void sensor_event_cb(const inv_sensor_event_t * event, void * arg){
  8001eea:	4603      	mov	r3, r0
  8001eec:	4aa6      	ldr	r2, [pc, #664]	; (8002188 <sensor_event_cb+0x3a0>)
  8001eee:	6013      	str	r3, [r2, #0]
-        phi = atan2(2*((q[0]*q[3])+(q[1]*q[2])),1-(2*(pow(q[2],2)+pow(q[3],2))));//*M_1_PI*180;
+        phi = atan2(2*((q[0]*q[3])+(q[1]*q[2])),1-(2*(pow(q[2],2)+pow(q[3],2))));
  8001ef0:	ed97 7a02 	vldr	s14, [r7, #8]
  8001ef4:	edd7 7a05 	vldr	s15, [r7, #20]
  8001ef8:	ee27 7a27 	vmul.f32	s14, s14, s15
@@ -3794,10 +3790,6 @@ static void sensor_event_cb(const inv_sensor_event_t * event, void * arg){
  8001f9e:	4603      	mov	r3, r0
  8001fa0:	4a7a      	ldr	r2, [pc, #488]	; (800218c <sensor_event_cb+0x3a4>)
  8001fa2:	6013      	str	r3, [r2, #0]
-
-//        phi = atan2(2*((q[0]*q[1])+(q[2]*q[3])),1-(2*(pow(q[1],2)+pow(q[2],2))));//*M_1_PI*180;
-//        theta = asin(2*((q[0]*q[2])-(q[3]*q[1])));//*M_1_PI*180;
-//        psi = atan2(2*((q[0]*q[3])+(q[1]*q[2])),1-(2*(pow(q[2],2)+pow(q[3],2))));//*M_1_PI*180;
 
         if(theta <= -M_PI_2)
  8001fa4:	4b78      	ldr	r3, [pc, #480]	; (8002188 <sensor_event_cb+0x3a0>)
@@ -3919,10 +3911,6 @@ static void sensor_event_cb(const inv_sensor_event_t * event, void * arg){
  80020b6:	4a36      	ldr	r2, [pc, #216]	; (8002190 <sensor_event_cb+0x3a8>)
  80020b8:	6053      	str	r3, [r2, #4]
 
-//        angToDAC[THETA_IDX] = (theta >= 0) ?
-//                theta*M_1_PI(theta+M_PI)*M_1_PI*0.5*4095;
-//        angToDAC[PHI_IDX] = (phi+M_PI)*M_1_PI*0.5*4095;
-
         angToLCD[THETA_IDX] = (theta+M_PI_2)*M_2_PI*90;
  80020ba:	4b33      	ldr	r3, [pc, #204]	; (8002188 <sensor_event_cb+0x3a0>)
  80020bc:	681b      	ldr	r3, [r3, #0]
@@ -4031,10 +4019,8 @@ static void sensor_event_cb(const inv_sensor_event_t * event, void * arg){
         angToLCD[PHI_IDX] = (phi >= 0) ?
  80021e6:	4a0a      	ldr	r2, [pc, #40]	; (8002210 <sensor_event_cb+0x428>)
  80021e8:	6053      	str	r3, [r2, #4]
-    //                a[0] = event->data.orientation.x;
-    //                a[1] = event->data.orientation.y;
-    //                a[2] = event->data.orientation.z;
-    //            }
+
+    }
 
 }
  80021ea:	bf00      	nop
@@ -4916,7 +4902,7 @@ static void noop(void* arg){
  * @brief  This function is executed in case of error occurrence.
  * @retval None
  */
-void Error_Handler(void)
+ void Error_Handler(void)
 {
  800284c:	b480      	push	{r7}
  800284e:	af00      	add	r7, sp, #0
@@ -4930,9 +4916,9 @@ __STATIC_FORCEINLINE void __disable_irq(void)
 }
  8002852:	bf00      	nop
     /* USER CODE BEGIN Error_Handler_Debug */
-    /* User can add his own implementation to report the HAL error return state */
-    __disable_irq();
-    while (1)
+     /* User can add his own implementation to report the HAL error return state */
+     __disable_irq();
+     while (1)
  8002854:	e7fe      	b.n	8002854 <Error_Handler+0x8>
 	...
 
