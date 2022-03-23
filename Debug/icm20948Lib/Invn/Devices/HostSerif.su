@@ -1,0 +1,2 @@
+../icm20948Lib/Invn/Devices/HostSerif.c:28:6:inv_host_serif_set_instance	16	static
+../icm20948Lib/Invn/Devices/HostSerif.c:33:26:inv_host_serif_get_instance	4	static

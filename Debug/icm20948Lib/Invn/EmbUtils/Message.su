@@ -1,0 +1,4 @@
+../icm20948Lib/Invn/EmbUtils/Message.c:32:6:inv_msg_printer_default	56	static
+../icm20948Lib/Invn/EmbUtils/Message.c:52:6:inv_msg_setup	16	static
+../icm20948Lib/Invn/EmbUtils/Message.c:62:6:inv_msg	28	static
+../icm20948Lib/Invn/EmbUtils/Message.c:72:5:inv_msg_get_level	4	static

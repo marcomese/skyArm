@@ -1,0 +1,3 @@
+../utilLib/Src/I2CSerifHal.c:5:12:i2c_read_reg	48	static
+../utilLib/Src/I2CSerifHal.c:22:12:i2c_write_reg	48	static
+../utilLib/Src/I2CSerifHal.c:48:24:get_serif_inst_i2c	4	static

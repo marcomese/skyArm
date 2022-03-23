@@ -1,0 +1,7 @@
+../utilLib/Src/timerDelay.c:12:13:start_timer	8	static
+../utilLib/Src/timerDelay.c:17:13:stop_timer	8	static
+../utilLib/Src/timerDelay.c:22:13:internal_delay	32	static
+../utilLib/Src/timerDelay.c:38:6:delay_us	24	static
+../utilLib/Src/timerDelay.c:57:6:delay_ms	16	static
+../utilLib/Src/timerDelay.c:62:6:inv_icm20948_sleep_us	16	static
+../utilLib/Src/timerDelay.c:66:10:inv_icm20948_get_time_us	4	static
