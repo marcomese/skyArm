@@ -1,0 +1,3 @@
+C:/Users/mames/Documents/progetti_stm32/skyArm_v2/ili9341/ili9341_touch.c:16:6:ILI9341_TouchUnselect	8	static
+C:/Users/mames/Documents/progetti_stm32/skyArm_v2/ili9341/ili9341_touch.c:21:6:ILI9341_TouchPressed	8	static
+C:/Users/mames/Documents/progetti_stm32/skyArm_v2/ili9341/ili9341_touch.c:25:6:ILI9341_TouchGetCoordinates	64	static

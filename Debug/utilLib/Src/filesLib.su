@@ -1,0 +1,5 @@
+../utilLib/Src/filesLib.c:10:9:readConfig	584	static
+../utilLib/Src/filesLib.c:32:9:writeConfig	584	static
+../utilLib/Src/filesLib.c:51:14:resetLog	568	static
+../utilLib/Src/filesLib.c:72:5:readLog	768	static
+../utilLib/Src/filesLib.c:101:14:writeLog	576	static

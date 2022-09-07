@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>skyArm</name>
+	<name>skyArm_v2</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -31,19 +31,19 @@
 	</natures>
 	<linkedResources>
 		<link>
-			<name>bitmaps</name>
+			<name>graphics</name>
 			<type>2</type>
-			<location>C:/Users/mames/Documents/progetti_stm32/skyArm/bitmaps</location>
+			<location>C:/Users/mames/Documents/progetti_stm32/skyArm_v2/graphics</location>
 		</link>
 		<link>
-			<name>sh1106</name>
+			<name>ili9341</name>
 			<type>2</type>
-			<location>C:/Users/mames/Documents/progetti_stm32/skyArm/sh1106</location>
+			<location>C:/Users/mames/Documents/progetti_stm32/skyArm_v2/ili9341</location>
 		</link>
 		<link>
 			<name>vl53l1x</name>
 			<type>2</type>
-			<location>C:/Users/mames/Documents/progetti_stm32/skyArm/vl53l1x</location>
+			<location>C:/Users/mames/Documents/progetti_stm32/skyArm_v2/vl53l1x</location>
 		</link>
 	</linkedResources>
 </projectDescription>

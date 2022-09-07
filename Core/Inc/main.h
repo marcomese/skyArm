@@ -57,48 +57,35 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define ICM_INT_Pin GPIO_PIN_14
+#define ICM_INT_GPIO_Port GPIOC
+#define ICM_INT_EXTI_IRQn EXTI15_10_IRQn
+#define DIST_INT_Pin GPIO_PIN_15
+#define DIST_INT_GPIO_Port GPIOC
 #define LCD_RST_Pin GPIO_PIN_0
 #define LCD_RST_GPIO_Port GPIOA
 #define VCP_TX_Pin GPIO_PIN_2
 #define VCP_TX_GPIO_Port GPIOA
-#define DAC_LEN_Pin GPIO_PIN_4
-#define DAC_LEN_GPIO_Port GPIOA
-#define DAC_ANG_Pin GPIO_PIN_5
-#define DAC_ANG_GPIO_Port GPIOA
-#define BTN_DOWN_Pin GPIO_PIN_0
-#define BTN_DOWN_GPIO_Port GPIOB
-#define BTN_DOWN_EXTI_IRQn EXTI0_IRQn
-#define BTN_OK_Pin GPIO_PIN_1
-#define BTN_OK_GPIO_Port GPIOB
-#define BTN_OK_EXTI_IRQn EXTI1_IRQn
+#define SD_CS_Pin GPIO_PIN_7
+#define SD_CS_GPIO_Port GPIOA
+#define TOUCH_CS_Pin GPIO_PIN_0
+#define TOUCH_CS_GPIO_Port GPIOB
+#define LCD_DC_Pin GPIO_PIN_1
+#define LCD_DC_GPIO_Port GPIOB
 #define MUX_SEL_Pin GPIO_PIN_8
 #define MUX_SEL_GPIO_Port GPIOA
-#define BTN_UP_Pin GPIO_PIN_11
-#define BTN_UP_GPIO_Port GPIOA
-#define BTN_UP_EXTI_IRQn EXTI15_10_IRQn
-#define JOY_RIGHT_Pin GPIO_PIN_12
-#define JOY_RIGHT_GPIO_Port GPIOA
-#define JOY_RIGHT_EXTI_IRQn EXTI15_10_IRQn
 #define SWDIO_Pin GPIO_PIN_13
 #define SWDIO_GPIO_Port GPIOA
 #define SWCLK_Pin GPIO_PIN_14
 #define SWCLK_GPIO_Port GPIOA
 #define VCP_RX_Pin GPIO_PIN_15
 #define VCP_RX_GPIO_Port GPIOA
-#define JOY_PRESS_Pin GPIO_PIN_3
-#define JOY_PRESS_GPIO_Port GPIOB
-#define JOY_PRESS_EXTI_IRQn EXTI3_IRQn
-#define JOY_UP_Pin GPIO_PIN_5
-#define JOY_UP_GPIO_Port GPIOB
-#define JOY_UP_EXTI_IRQn EXTI9_5_IRQn
-#define JOY_DOWN_Pin GPIO_PIN_6
-#define JOY_DOWN_GPIO_Port GPIOB
-#define JOY_DOWN_EXTI_IRQn EXTI9_5_IRQn
-#define JOY_LEFT_Pin GPIO_PIN_7
-#define JOY_LEFT_GPIO_Port GPIOB
-#define JOY_LEFT_EXTI_IRQn EXTI9_5_IRQn
+#define LCD_CS_Pin GPIO_PIN_6
+#define LCD_CS_GPIO_Port GPIOB
+#define TOUCH_IRQ_Pin GPIO_PIN_7
+#define TOUCH_IRQ_GPIO_Port GPIOB
 /* USER CODE BEGIN Private defines */
-
+#define SD_SPI_HANDLE hspi1
 /* USER CODE END Private defines */
 
 #ifdef __cplusplus

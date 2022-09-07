@@ -11,7 +11,7 @@
 #include "stm32l4xx_hal.h"
 #include "Invn/Devices/SerifHal.h"
 
-#define I2C_SLAVE_ADDRESS 0x68
+#define I2C_SLAVE_ADDRESS 0x69
 #define MAX_RW_TRANS_SIZE 255U
 
 const inv_serif_hal_t* get_serif_inst_i2c(void);
