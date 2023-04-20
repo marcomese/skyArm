@@ -1,0 +1,2 @@
+Icm20948SelfTest.c:362:12:inv_do_test_accelgyro	7
+Icm20948SelfTest.c:414:5:inv_icm20948_run_selftest	15

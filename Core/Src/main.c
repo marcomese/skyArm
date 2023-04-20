@@ -1044,6 +1044,9 @@ static void sensor_event_cb(const inv_sensor_event_t * event, void * arg){
     (void)arg;
 
     uint8_t quatUpdated = 0;
+    float rx = 0.0;
+    float ry = 0.0;
+    float rz = 0.0;
 
     if(event->status == INV_SENSOR_STATUS_DATA_UPDATED){
         switch(INV_SENSOR_ID_TO_TYPE(event->sensor)){
@@ -1073,8 +1076,15 @@ static void sensor_event_cb(const inv_sensor_event_t * event, void * arg){
         }
 
         if(quatUpdated){
-            theta = atan2(2*((q[0]*q[1])+(q[2]*q[3])),1-(2*(pow(q[1],2)+pow(q[2],2))));
-            phi = atan2(2*((q[0]*q[3])+(q[1]*q[2])),1-(2*(pow(q[2],2)+pow(q[3],2))));
+            //theta = atan2(2*((q[0]*q[1])+(q[2]*q[3])),1-(2*(pow(q[1],2)+pow(q[2],2))));
+            //phi = atan2(2*((q[0]*q[3])+(q[1]*q[2])),1-(2*(pow(q[2],2)+pow(q[3],2))));
+
+            rx = pow(q[0],2)+pow(q[1],2)-pow(q[2],2)-pow(q[3],2);
+            ry = 2*((q[0]*q[3])+(q[1]*q[2]));
+            rz = 2*((q[1]*q[3])-(q[0]*q[2]));
+
+            theta = atan2(sqrt(pow(rx,2)+pow(ry,2)),rz);
+            phi = atan2(ry,rx);
 
             thetaRel = theta - thetaZero;
             phiRel = phi - phiZero;

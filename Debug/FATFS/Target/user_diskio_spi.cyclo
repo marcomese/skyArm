@@ -1,0 +1,11 @@
+user_diskio_spi.c:234:5:xmit_datablock.part.0	2
+user_diskio_spi.c:205:5:rcvr_datablock.constprop	5
+user_diskio_spi.c:205:5:rcvr_datablock	5
+user_diskio_spi.c:262:6:send_cmd	11
+user_diskio_spi.c:89:6:SPI_Timer_On	1
+user_diskio_spi.c:94:9:SPI_Timer_Status	1
+user_diskio_spi.c:321:16:USER_SPI_initialize	18
+user_diskio_spi.c:377:16:USER_SPI_status	2
+user_diskio_spi.c:392:16:USER_SPI_read	10
+user_diskio_spi.c:431:16:USER_SPI_write	18
+user_diskio_spi.c:472:16:USER_SPI_ioctl	28

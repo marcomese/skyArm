@@ -1,0 +1,11 @@
+vl53l1_platform.c:51:5:_I2CWrite	1
+vl53l1_platform.c:63:5:_I2CRead	1
+vl53l1_platform.c:75:8:VL53L1_WriteMulti	2
+vl53l1_platform.c:96:8:VL53L1_ReadMulti	3
+vl53l1_platform.c:120:8:VL53L1_WrByte	1
+vl53l1_platform.c:137:8:VL53L1_WrWord	1
+vl53l1_platform.c:155:8:VL53L1_WrDWord	1
+vl53l1_platform.c:174:8:VL53L1_RdByte	3
+vl53l1_platform.c:198:8:VL53L1_RdWord	3
+vl53l1_platform.c:225:8:VL53L1_RdDWord	3
+vl53l1_platform.c:252:8:VL53L1_WaitMs	1
