@@ -1,0 +1,8 @@
+display.c:10:6:loadBMP	3
+display.c:27:6:drawTileFromBMP	4
+display.c:55:6:drawTileTxt	4
+display.c:66:6:drawBar	2
+display.c:74:6:transformCoord	4
+display.c:91:9:getZonePressed	5
+display.c:109:6:displayInfo	3
+display.c:155:6:clearInfo	1

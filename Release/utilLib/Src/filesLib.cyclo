@@ -1,0 +1,5 @@
+filesLib.c:10:9:readConfig	4
+filesLib.c:32:9:writeConfig	4
+filesLib.c:51:14:resetLog	2
+filesLib.c:72:5:readLog	3
+filesLib.c:101:14:writeLog	2

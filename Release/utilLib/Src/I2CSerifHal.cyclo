@@ -1,0 +1,3 @@
+I2CSerifHal.c:22:12:i2c_write_reg	1
+I2CSerifHal.c:5:12:i2c_read_reg	1
+I2CSerifHal.c:48:24:get_serif_inst_i2c	1

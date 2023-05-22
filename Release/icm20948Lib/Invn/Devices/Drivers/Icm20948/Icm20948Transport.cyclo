@@ -1,0 +1,12 @@
+Icm20948Transport.c:93:12:inv_set_bank.part.0	5
+Icm20948Transport.c:30:5:inv_icm20948_read_reg	2
+Icm20948Transport.c:35:5:inv_icm20948_write_reg	2
+Icm20948Transport.c:40:6:inv_icm20948_sleep_100us	1
+Icm20948Transport.c:45:6:inv_icm20948_get_tick_count	1
+Icm20948Transport.c:56:6:inv_icm20948_transport_init	1
+Icm20948Transport.c:123:5:inv_icm20948_write_mems_reg	26
+Icm20948Transport.c:163:5:inv_icm20948_write_single_mems_reg	23
+Icm20948Transport.c:193:5:inv_icm20948_read_mems_reg	51
+Icm20948Transport.c:244:5:inv_icm20948_read_mems	58
+Icm20948Transport.c:320:5:inv_icm20948_write_mems	15
+Icm20948Transport.c:383:5:inv_icm20948_write_single_mems_reg_core	4
