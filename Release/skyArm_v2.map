@@ -204,7 +204,6 @@ Discarded input sections
  .text          0x0000000000000000        0x0 ./Core/Src/main.o
  .data          0x0000000000000000        0x0 ./Core/Src/main.o
  .bss           0x0000000000000000        0x0 ./Core/Src/main.o
- .text.poly2d   0x0000000000000000       0x74 ./Core/Src/main.o
  .text.check_rc
                 0x0000000000000000       0x18 ./Core/Src/main.o
  .bss.distPresent
@@ -217,9 +216,6 @@ Discarded input sections
  .bss.psiRel    0x0000000000000000        0x4 ./Core/Src/main.o
  .bss.zeroFeedback
                 0x0000000000000000        0x8 ./Core/Src/main.o
- .rodata.c0     0x0000000000000000        0x4 ./Core/Src/main.o
- .rodata.c1     0x0000000000000000        0x4 ./Core/Src/main.o
- .rodata.c2     0x0000000000000000        0x4 ./Core/Src/main.o
  .text          0x0000000000000000        0x0 ./Core/Src/retarget.o
  .data          0x0000000000000000        0x0 ./Core/Src/retarget.o
  .bss           0x0000000000000000        0x0 ./Core/Src/retarget.o
@@ -2419,9 +2415,10 @@ LOAD c:/st/stm32cubeide_1.12.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.ext
  .text.check_rc.part.0
                 0x0000000008001384       0x14 ./Core/Src/main.o
  .text.inv_device_set_sensor_period_us.constprop.0
-                0x0000000008001398       0x40 ./Core/Src/main.o
+                0x0000000008001398       0x3c ./Core/Src/main.o
  .text.inv_device_start_sensor.constprop.0
-                0x00000000080013d8       0x38 ./Core/Src/main.o
+                0x00000000080013d4       0x38 ./Core/Src/main.o
+ *fill*         0x000000000800140c        0x4 
  .text.SystemClock_Config
                 0x0000000008001410       0xb0 ./Core/Src/main.o
                 0x0000000008001410                SystemClock_Config

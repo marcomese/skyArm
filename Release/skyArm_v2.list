@@ -1627,52 +1627,52 @@ Disassembly of section .text:
  8001394:	080184ac 	.word	0x080184ac
 
 08001398 <inv_device_set_sensor_period_us.constprop.0>:
- 8001398:	b510      	push	{r4, lr}
- 800139a:	4c0a      	ldr	r4, [pc, #40]	; (80013c4 <inv_device_set_sensor_period_us.constprop.0+0x2c>)
- 800139c:	6863      	ldr	r3, [r4, #4]
- 800139e:	b153      	cbz	r3, 80013b6 <inv_device_set_sensor_period_us.constprop.0+0x1e>
- 80013a0:	6adb      	ldr	r3, [r3, #44]	; 0x2c
- 80013a2:	b12b      	cbz	r3, 80013b0 <inv_device_set_sensor_period_us.constprop.0+0x18>
- 80013a4:	4601      	mov	r1, r0
- 80013a6:	4a08      	ldr	r2, [pc, #32]	; (80013c8 <inv_device_set_sensor_period_us.constprop.0+0x30>)
- 80013a8:	6820      	ldr	r0, [r4, #0]
- 80013aa:	e8bd 4010 	ldmia.w	sp!, {r4, lr}
- 80013ae:	4718      	bx	r3
- 80013b0:	f06f 0001 	mvn.w	r0, #1
- 80013b4:	bd10      	pop	{r4, pc}
- 80013b6:	4b05      	ldr	r3, [pc, #20]	; (80013cc <inv_device_set_sensor_period_us.constprop.0+0x34>)
- 80013b8:	4a05      	ldr	r2, [pc, #20]	; (80013d0 <inv_device_set_sensor_period_us.constprop.0+0x38>)
- 80013ba:	4806      	ldr	r0, [pc, #24]	; (80013d4 <inv_device_set_sensor_period_us.constprop.0+0x3c>)
- 80013bc:	f240 117f 	movw	r1, #383	; 0x17f
- 80013c0:	f012 fdf2 	bl	8013fa8 <__assert_func>
+ 8001398:	4a0a      	ldr	r2, [pc, #40]	; (80013c4 <inv_device_set_sensor_period_us.constprop.0+0x2c>)
+ 800139a:	6853      	ldr	r3, [r2, #4]
+ 800139c:	b14b      	cbz	r3, 80013b2 <inv_device_set_sensor_period_us.constprop.0+0x1a>
+ 800139e:	6adb      	ldr	r3, [r3, #44]	; 0x2c
+ 80013a0:	b123      	cbz	r3, 80013ac <inv_device_set_sensor_period_us.constprop.0+0x14>
+ 80013a2:	4601      	mov	r1, r0
+ 80013a4:	6810      	ldr	r0, [r2, #0]
+ 80013a6:	f24c 3250 	movw	r2, #50000	; 0xc350
+ 80013aa:	4718      	bx	r3
+ 80013ac:	f06f 0001 	mvn.w	r0, #1
+ 80013b0:	4770      	bx	lr
+ 80013b2:	b510      	push	{r4, lr}
+ 80013b4:	4b04      	ldr	r3, [pc, #16]	; (80013c8 <inv_device_set_sensor_period_us.constprop.0+0x30>)
+ 80013b6:	4a05      	ldr	r2, [pc, #20]	; (80013cc <inv_device_set_sensor_period_us.constprop.0+0x34>)
+ 80013b8:	4805      	ldr	r0, [pc, #20]	; (80013d0 <inv_device_set_sensor_period_us.constprop.0+0x38>)
+ 80013ba:	f240 117f 	movw	r1, #383	; 0x17f
+ 80013be:	f012 fdf3 	bl	8013fa8 <__assert_func>
+ 80013c2:	bf00      	nop
  80013c4:	2000c1b8 	.word	0x2000c1b8
- 80013c8:	000249f0 	.word	0x000249f0
- 80013cc:	080184b8 	.word	0x080184b8
- 80013d0:	080186f4 	.word	0x080186f4
- 80013d4:	080184c8 	.word	0x080184c8
+ 80013c8:	080184b8 	.word	0x080184b8
+ 80013cc:	080186f4 	.word	0x080186f4
+ 80013d0:	080184c8 	.word	0x080184c8
 
-080013d8 <inv_device_start_sensor.constprop.0>:
- 80013d8:	4a09      	ldr	r2, [pc, #36]	; (8001400 <inv_device_start_sensor.constprop.0+0x28>)
- 80013da:	6853      	ldr	r3, [r2, #4]
- 80013dc:	b143      	cbz	r3, 80013f0 <inv_device_start_sensor.constprop.0+0x18>
- 80013de:	6a9b      	ldr	r3, [r3, #40]	; 0x28
- 80013e0:	b11b      	cbz	r3, 80013ea <inv_device_start_sensor.constprop.0+0x12>
- 80013e2:	4601      	mov	r1, r0
- 80013e4:	6810      	ldr	r0, [r2, #0]
- 80013e6:	2201      	movs	r2, #1
- 80013e8:	4718      	bx	r3
- 80013ea:	f06f 0001 	mvn.w	r0, #1
- 80013ee:	4770      	bx	lr
- 80013f0:	b510      	push	{r4, lr}
- 80013f2:	4b04      	ldr	r3, [pc, #16]	; (8001404 <inv_device_start_sensor.constprop.0+0x2c>)
- 80013f4:	4a04      	ldr	r2, [pc, #16]	; (8001408 <inv_device_start_sensor.constprop.0+0x30>)
- 80013f6:	4805      	ldr	r0, [pc, #20]	; (800140c <inv_device_start_sensor.constprop.0+0x34>)
- 80013f8:	f240 1151 	movw	r1, #337	; 0x151
- 80013fc:	f012 fdd4 	bl	8013fa8 <__assert_func>
- 8001400:	2000c1b8 	.word	0x2000c1b8
- 8001404:	080184b8 	.word	0x080184b8
- 8001408:	080186dc 	.word	0x080186dc
- 800140c:	080184c8 	.word	0x080184c8
+080013d4 <inv_device_start_sensor.constprop.0>:
+ 80013d4:	4a09      	ldr	r2, [pc, #36]	; (80013fc <inv_device_start_sensor.constprop.0+0x28>)
+ 80013d6:	6853      	ldr	r3, [r2, #4]
+ 80013d8:	b143      	cbz	r3, 80013ec <inv_device_start_sensor.constprop.0+0x18>
+ 80013da:	6a9b      	ldr	r3, [r3, #40]	; 0x28
+ 80013dc:	b11b      	cbz	r3, 80013e6 <inv_device_start_sensor.constprop.0+0x12>
+ 80013de:	4601      	mov	r1, r0
+ 80013e0:	6810      	ldr	r0, [r2, #0]
+ 80013e2:	2201      	movs	r2, #1
+ 80013e4:	4718      	bx	r3
+ 80013e6:	f06f 0001 	mvn.w	r0, #1
+ 80013ea:	4770      	bx	lr
+ 80013ec:	b510      	push	{r4, lr}
+ 80013ee:	4b04      	ldr	r3, [pc, #16]	; (8001400 <inv_device_start_sensor.constprop.0+0x2c>)
+ 80013f0:	4a04      	ldr	r2, [pc, #16]	; (8001404 <inv_device_start_sensor.constprop.0+0x30>)
+ 80013f2:	4805      	ldr	r0, [pc, #20]	; (8001408 <inv_device_start_sensor.constprop.0+0x34>)
+ 80013f4:	f240 1151 	movw	r1, #337	; 0x151
+ 80013f8:	f012 fdd6 	bl	8013fa8 <__assert_func>
+ 80013fc:	2000c1b8 	.word	0x2000c1b8
+ 8001400:	080184b8 	.word	0x080184b8
+ 8001404:	080186dc 	.word	0x080186dc
+ 8001408:	080184c8 	.word	0x080184c8
+ 800140c:	00000000 	.word	0x00000000
 
 08001410 <SystemClock_Config>:
  8001410:	b500      	push	{lr}
@@ -2206,19 +2206,19 @@ Disassembly of section .text:
  80019ee:	3001      	adds	r0, #1
  80019f0:	f000 823c 	beq.w	8001e6c <main+0x9ac>
  80019f4:	2001      	movs	r0, #1
- 80019f6:	f7ff fcef 	bl	80013d8 <inv_device_start_sensor.constprop.0>
+ 80019f6:	f7ff fced 	bl	80013d4 <inv_device_start_sensor.constprop.0>
  80019fa:	3001      	adds	r0, #1
  80019fc:	f000 8236 	beq.w	8001e6c <main+0x9ac>
  8001a00:	2004      	movs	r0, #4
- 8001a02:	f7ff fce9 	bl	80013d8 <inv_device_start_sensor.constprop.0>
+ 8001a02:	f7ff fce7 	bl	80013d4 <inv_device_start_sensor.constprop.0>
  8001a06:	3001      	adds	r0, #1
  8001a08:	f000 8230 	beq.w	8001e6c <main+0x9ac>
  8001a0c:	4638      	mov	r0, r7
- 8001a0e:	f7ff fce3 	bl	80013d8 <inv_device_start_sensor.constprop.0>
+ 8001a0e:	f7ff fce1 	bl	80013d4 <inv_device_start_sensor.constprop.0>
  8001a12:	3001      	adds	r0, #1
  8001a14:	f000 822a 	beq.w	8001e6c <main+0x9ac>
  8001a18:	200b      	movs	r0, #11
- 8001a1a:	f7ff fcdd 	bl	80013d8 <inv_device_start_sensor.constprop.0>
+ 8001a1a:	f7ff fcdb 	bl	80013d4 <inv_device_start_sensor.constprop.0>
  8001a1e:	3001      	adds	r0, #1
  8001a20:	f000 8224 	beq.w	8001e6c <main+0x9ac>
  8001a24:	486b      	ldr	r0, [pc, #428]	; (8001bd4 <main+0x714>)
