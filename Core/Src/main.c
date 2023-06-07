@@ -104,11 +104,11 @@ static const inv_sensor_listener_t sensor_listener = {sensor_event_cb, 0};
 uint16_t vl53l1xDev = 0x52;
 float q[4] = {0.0, 0.0, 0.0, 0.0};
 float a[4] = {0.0, 0.0, 0.0, 0.0};
-float g[4] = {0.0, 0.0, 0.0, 0.0};
+//float g[4] = {0.0, 0.0, 0.0, 0.0};
 float m[4] = {0.0, 0.0, 0.0, 0.0};
 uint8_t aQ = 0;
 uint8_t aA = 0;
-uint8_t aG = 0;
+//uint8_t aG = 0;
 uint8_t aM = 0;
 volatile float phi = 0.0, theta = 0.0, psi = 0.0;
 volatile float phiRel = 0.0, thetaRel = 0.0, psiRel = 0.0;
@@ -340,12 +340,12 @@ int main(void)
                      "$phi=%03.2f,theta=%03.2f,dist=%01.3f,"
                      "q0=%03.2f,q1=%03.2f,q2=%03.2f,q3=%03.2f,"
                      "ax=%03.2f,ay=%03.2f,az=%03.2f,"
-                     "gx=%03.2f,gy=%03.2f,gz=%03.2f,"
+//                     "gx=%03.2f,gy=%03.2f,gz=%03.2f,"
                      "mx=%03.2f,my=%03.2f,mz=%03.2f\n",
                      phi,theta,distToDisp,
                      q[0],q[1],q[2],q[3],
                      a[0],a[1],a[2],
-                     g[0],g[1],g[2],
+//                     g[0],g[1],g[2],
                      m[0],m[1],m[2]);//,
 
             if(monitorEnabled)
@@ -987,20 +987,20 @@ static inv_device_t* initICM20948(void){
 
     rc  = inv_device_set_sensor_period_us(device, INV_SENSOR_TYPE_ACCELEROMETER, 50000);
     check_rc(rc);
-    rc  = inv_device_set_sensor_period_us(device, INV_SENSOR_TYPE_GYROSCOPE, 50000);
-    check_rc(rc);
+//    rc  = inv_device_set_sensor_period_us(device, INV_SENSOR_TYPE_GYROSCOPE, 50000);
+//    check_rc(rc);
     rc  = inv_device_set_sensor_period_us(device, INV_SENSOR_TYPE_MAGNETOMETER, 50000);
     check_rc(rc);
-    rc  = inv_device_set_sensor_period_us(device, INV_SENSOR_TYPE_ROTATION_VECTOR, 50000);
+    rc  = inv_device_set_sensor_period_us(device, INV_SENSOR_TYPE_GEOMAG_ROTATION_VECTOR, 50000);
     check_rc(rc);
 
     rc = inv_device_start_sensor(device, INV_SENSOR_TYPE_ACCELEROMETER);
     check_rc(rc);
-    rc = inv_device_start_sensor(device, INV_SENSOR_TYPE_GYROSCOPE);
-    check_rc(rc);
+//    rc = inv_device_start_sensor(device, INV_SENSOR_TYPE_GYROSCOPE);
+//    check_rc(rc);
     rc = inv_device_start_sensor(device, INV_SENSOR_TYPE_MAGNETOMETER);
     check_rc(rc);
-    rc = inv_device_start_sensor(device, INV_SENSOR_TYPE_ROTATION_VECTOR);
+    rc = inv_device_start_sensor(device, INV_SENSOR_TYPE_GEOMAG_ROTATION_VECTOR);
     check_rc(rc);
 
     return device;
@@ -1034,13 +1034,13 @@ static void sensor_event_cb(const inv_sensor_event_t * event, void * arg){
                 a[1] = event->data.acc.vect[1];
                 a[2] = event->data.acc.vect[2];
             }
-        case INV_SENSOR_TYPE_GYROSCOPE:
-            aG = event->data.gyr.accuracy_flag;
-            if(aG == 3){
-                g[0] = event->data.gyr.vect[0];
-                g[1] = event->data.gyr.vect[1];
-                g[2] = event->data.gyr.vect[2];
-            }
+//        case INV_SENSOR_TYPE_GYROSCOPE:
+//            aG = event->data.gyr.accuracy_flag;
+//            if(aG == 3){
+//                g[0] = event->data.gyr.vect[0];
+//                g[1] = event->data.gyr.vect[1];
+//                g[2] = event->data.gyr.vect[2];
+//            }
         case INV_SENSOR_TYPE_MAGNETOMETER:
             aM = event->data.mag.accuracy_flag;
             if(aM == 3){
