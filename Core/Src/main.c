@@ -115,7 +115,7 @@ volatile float phiRel = 0.0, thetaRel = 0.0, psiRel = 0.0;
 volatile float phiZero = 0.0, thetaZero = 0.0;
 uint16_t dist = 0;
 int16_t distOffset = 0;
-int16_t distXtalk = 0;
+uint16_t distXtalk = 0;
 volatile uint32_t distToDAC = 0;
 volatile uint32_t angToDAC[2] = { 0, 0 };
 volatile float angToLCD[2] = { 0.0, 0.0 };
@@ -287,7 +287,9 @@ int main(void)
         /* USER CODE BEGIN 3 */
 
         memset(timeStr, '\0', TIMESTR_LEN);
-        snprintf(timeStr, TIMESTR_LEN, "[%02d:%02d:%02d]", hours, minutes, seconds);
+        rc = snprintf(timeStr, TIMESTR_LEN, "[%02d:%02d:%02d]", hours, minutes, seconds);
+        if(rc < 0)
+            printf("Truncating timestamp %s", timeStr);
 
         if(ILI9341_TouchPressed()){
             validCoord = ILI9341_TouchGetCoordinates(&touchX, &touchY);

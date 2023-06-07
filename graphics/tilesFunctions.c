@@ -29,7 +29,7 @@ extern FIL barFile;
 extern uint8_t imgBuf[BAR_SIZE];
 extern uint16_t vl53l1xDev;
 extern int16_t distOffset;
-extern int16_t distXtalk;
+extern uint16_t distXtalk;
 extern volatile float angToLCD[2];
 extern volatile float distToDisp;
 extern volatile uint8_t acqPaused;
@@ -58,7 +58,8 @@ void rotateScreen(){
 
     initScreen(&menu);
 
-    memcpy((void*)&config[SORIENT_IDX], (void*)&screenOrient, sizeof(uint32_t));
+    uint32_t scrOrientCfg = (uint32_t)screenOrient;
+    memcpy((void*)&config[SORIENT_IDX], (void*)&scrOrientCfg, sizeof(uint32_t));
 
     return;
 }
@@ -137,7 +138,8 @@ void calibrateDist(){
 
     while(VL53L1X_CalibrateOffset(vl53l1xDev, 140, &distOffset)){}
 
-    memcpy((void*)&config[DISTCAL_IDX], (void*)&distOffset, sizeof(uint32_t));
+    uint32_t dstOffCfg = (uint32_t)distOffset;
+    memcpy((void*)&config[DISTCAL_IDX], (void*)&dstOffCfg, sizeof(uint32_t));
 
     VL53L1X_SetOffset(vl53l1xDev,distOffset);
 
@@ -164,7 +166,8 @@ void crossTalkCalib(){
 
     while(VL53L1X_CalibrateXtalk(vl53l1xDev, 1500, &distXtalk)){}
 
-    memcpy((void*)&config[DISTXTALK_IDX], (void*)&distXtalk, sizeof(uint32_t));
+    uint32_t dstXtlkCfg = (uint32_t)distXtalk;
+    memcpy((void*)&config[DISTXTALK_IDX], (void*)&dstXtlkCfg, sizeof(uint32_t));
 
     VL53L1X_SetXtalk(vl53l1xDev,distXtalk);
 
