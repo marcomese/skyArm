@@ -1061,12 +1061,12 @@ static void sensor_event_cb(const inv_sensor_event_t * event, void * arg){
         thetaRel = theta - thetaZero;
         phiRel = phi - phiZero;
 
-        if(thetaRel <= -M_PI_2)
-            angToDAC[THETA_IDX] = 0;
-        else if(thetaRel >= M_PI_2)
+        if(thetaRel <= 0)
             angToDAC[THETA_IDX] = DAC_MAX;
+        else if(thetaRel >= M_PI)
+            angToDAC[THETA_IDX] = 0;
         else
-            angToDAC[THETA_IDX] = (thetaRel+M_PI_2)*DAC_MAX*M_1_PI;
+            angToDAC[THETA_IDX] = (M_PI-thetaRel)*DAC_MAX*M_1_PI;
 
         if(phiRel <= -M_PI)
             angToDAC[PHI_IDX] = 0;
